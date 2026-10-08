@@ -595,6 +595,43 @@ button{cursor:pointer;background:none;border:0;padding:0}
 .mini footer{font-size:.76rem;color:var(--steel);display:flex;justify-content:space-between;gap:8px}
 .minis .mini:nth-child(n+13){display:none}
 .minis.is-all .mini{display:flex}
+/* avis par produit */
+.rv{display:grid;gap:32px}
+.rv__pick{display:grid;gap:10px;max-width:760px}
+.rv__pick label,.rv__f label,.rv__rate legend{font-size:.84rem;color:var(--steel)}
+.rv select,.rv input[type="text"],.rv textarea{width:100%;background:#0c0c10;border:1px solid var(--line-2);border-radius:12px;padding:12px 14px;color:var(--paper);font:inherit}
+.rv textarea{min-height:140px;resize:vertical}
+.rv select:focus,.rv input[type="text"]:focus,.rv textarea:focus{border-color:var(--gold);outline:none}
+.rv__head{min-height:24px;font-size:.88rem;color:var(--steel)}
+.rv__grid{display:grid;gap:28px}
+@media(min-width:1000px){.rv__grid{grid-template-columns:1.1fr .9fr;align-items:start}}
+.rv__list{display:grid;gap:14px}
+.rv__item{padding:20px 22px;border-radius:18px;border:1px solid var(--line);background:#0c0c10;display:grid;gap:10px}
+.rv__item p{margin:0;font-size:.94rem;color:var(--paper-2);overflow-wrap:anywhere}
+.rv__item footer{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.82rem}
+.rv__item footer small{color:var(--steel)}
+.rv__pending{font-size:.72rem;color:var(--gold-2);border:1px solid rgba(200,161,90,.35);border-radius:999px;padding:2px 9px;margin-left:auto}
+.rv__empty{margin:0;padding:22px;border:1px dashed var(--line-2);border-radius:18px;color:var(--steel);font-size:.92rem}
+.rv__form{display:grid;gap:16px;padding:clamp(20px,3vw,32px);border-radius:22px;border:1px solid var(--line);background:#0c0c10}
+.rv__title{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.2rem);margin:0;line-height:1.05}
+.rv__title span{display:block;font-family:var(--sans);font-size:.84rem;color:var(--steel);margin-top:6px;line-height:1.4}
+.rv__row{display:grid;gap:14px}
+@media(min-width:560px){.rv__row{grid-template-columns:1fr 1fr}}
+.rv__f{display:grid;gap:6px}
+.rv__rate{position:relative;display:inline-flex;align-items:center;gap:4px;border:0;padding:0;margin:0;min-width:0}
+.rv__rate legend{float:left;margin-right:12px;padding:0}
+.rv__rate input{position:absolute;opacity:0;width:1px;height:1px}
+.rv__rate label{cursor:pointer;color:#3a3b40;line-height:1;transition:color .2s,transform .2s}
+.rv__rate label svg{width:28px;height:28px}
+.rv__rate label:hover{transform:scale(1.1)}
+.rv__rate label.is-on{color:var(--gold)}
+.rv__rate input:focus-visible+label{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:6px}
+.rv__check{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--paper-2);cursor:pointer}
+.rv__check input{margin-top:4px;accent-color:var(--gold)}
+.rv__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.rv__status{margin:0;font-size:.88rem;min-height:1.2em;color:#9fd8b0}
+.rv__status.is-err{color:#ff8a8a}
+[data-theme="light"] .rv__item,[data-theme="light"] .rv__form,[data-theme="light"] .rv select,[data-theme="light"] .rv input[type="text"],[data-theme="light"] .rv textarea{background:#fff}
 
 /* ============================================================
    16. FAQ
@@ -1229,37 +1266,43 @@ button{cursor:pointer;background:none;border:0;padding:0}
   </div>
 </section>
 
-<!-- ========== TÉMOIGNAGES (6 dispositifs) ========== -->
+<!-- ========== AVIS PAR PRODUIT ========== -->
 <section class="section tst" id="avis" aria-labelledby="tstTitle" style="border-top:1px solid var(--line)">
   <div class="wrap">
     <div class="section-head section-head--split">
-      <div><p class="kicker">Ils en parlent</p><h2 class="h2 split" id="tstTitle">Cent façons de choisir sa tech.</h2></div>
+      <div><p class="kicker">Avis des acheteurs</p><h2 class="h2 split" id="tstTitle">Vous l'avez acheté ? Donnez votre avis.</h2></div>
+      <p class="lede">Choisissez le produit que vous avez acheté, notez-le et racontez votre expérience. Vous pouvez laisser un avis pour chaque produit acheté.</p>
     </div>
-  </div>
-  <!-- Bande 1 : gauche → droite -->
-  <div class="tband-mask" aria-label="Témoignages, défilement vers la droite"><div class="tband tband--ltr" id="band1"></div></div>
-  <!-- Bande 2 : droite → gauche -->
-  <div class="tband-mask" aria-label="Témoignages, défilement vers la gauche"><div class="tband tband--rtl" id="band2"></div></div>
-  <div class="wrap">
-    <!-- Bande 3 : cartes flottantes -->
-    <div class="tblock">
-      <div class="tblock__head"><h3>En apesanteur</h3><p class="market__count">Survolez une carte pour la lire au premier plan.</p></div>
-      <div class="tfloat" id="band3"></div>
-    </div>
-    <!-- Bande 4 : slider -->
-    <div class="tblock slider">
-      <div class="tblock__head"><h3>Au fil des univers</h3>
-        <div class="slider__nav"><button class="iconbtn" id="slPrev" aria-label="Témoignage précédent"><svg><use href="#i-left"/></svg></button><button class="iconbtn" id="slNext" aria-label="Témoignage suivant"><svg><use href="#i-right"/></svg></button></div>
+    <div class="rv">
+      <div class="rv__pick">
+        <label for="rvProduct">Produit concerné</label>
+        <select id="rvProduct"></select>
+        <div class="rv__head" id="rvHead" aria-live="polite"></div>
       </div>
-      <div class="slider__track" id="band4" tabindex="0" aria-label="Témoignages, faire défiler"></div>
-      <div class="slider__prog"><i id="slProg"></i></div>
-    </div>
-    <!-- Bande 5 : témoignage géant -->
-    <div class="tblock giant" id="band5" aria-live="polite"></div>
-    <!-- Bande 6 : mini-avis -->
-    <div class="tblock">
-      <div class="tblock__head"><h3>En quelques mots</h3><button class="btn btn--ghost btn--sm" id="miniMore">Afficher tous les mini-avis</button></div>
-      <div class="minis" id="band6"></div>
+      <div class="rv__grid">
+        <div class="rv__list" id="rvList" aria-live="polite"></div>
+        <form class="rv__form" id="rvForm" novalidate>
+          <h3 class="rv__title">Votre avis<span id="rvFor"></span></h3>
+          <fieldset class="rv__rate" id="rvRate">
+            <legend>Votre note</legend>
+            <input type="radio" name="rating" id="rvR1" value="1"><label for="rvR1" aria-label="1 étoile sur 5"><svg aria-hidden="true"><use href="#i-star"/></svg></label>
+            <input type="radio" name="rating" id="rvR2" value="2"><label for="rvR2" aria-label="2 étoiles sur 5"><svg aria-hidden="true"><use href="#i-star"/></svg></label>
+            <input type="radio" name="rating" id="rvR3" value="3"><label for="rvR3" aria-label="3 étoiles sur 5"><svg aria-hidden="true"><use href="#i-star"/></svg></label>
+            <input type="radio" name="rating" id="rvR4" value="4"><label for="rvR4" aria-label="4 étoiles sur 5"><svg aria-hidden="true"><use href="#i-star"/></svg></label>
+            <input type="radio" name="rating" id="rvR5" value="5"><label for="rvR5" aria-label="5 étoiles sur 5"><svg aria-hidden="true"><use href="#i-star"/></svg></label>
+          </fieldset>
+          <div class="rv__row">
+            <div class="rv__f"><label for="rvName">Prénom ou pseudo</label><input type="text" id="rvName" name="name" maxlength="40" autocomplete="given-name"></div>
+            <div class="rv__f"><label for="rvCity">Ville (facultatif)</label><input type="text" id="rvCity" name="city" maxlength="40" autocomplete="address-level2"></div>
+          </div>
+          <div class="rv__f"><label for="rvText">Votre commentaire</label><textarea id="rvText" name="text" maxlength="800" placeholder="Qualité, autonomie, usage au quotidien, ce que vous avez aimé ou moins aimé…"></textarea></div>
+          <div class="rv__hp" aria-hidden="true"><label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <label class="rv__check"><input type="checkbox" name="bought"> <span>Je confirme avoir acheté ce produit.</span></label>
+          <button type="submit" class="btn btn--gold">Envoyer mon avis</button>
+          <p class="rv__status" id="rvStatus" role="status"></p>
+          <p class="note">Votre avis est relu avant d'être publié. Seuls votre prénom ou pseudo et votre ville (si vous la renseignez) sont affichés. N'indiquez aucune information personnelle dans votre commentaire.</p>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -1299,7 +1342,8 @@ button{cursor:pointer;background:none;border:0;padding:0}
 </section>
 <section id="confidentialite" class="wrap">
   <h2>Politique de confidentialité</h2>
-  <p>Ce site ne collecte aucune donnée personnelle : pas de compte, pas de formulaire, pas d'outil de statistiques.</p>
+  <p>Ce site ne collecte aucune donnée personnelle, sauf si vous déposez un avis : pas de compte, pas d'outil de statistiques.</p>
+  <p>Si vous donnez un avis sur un produit, les informations saisies (prénom ou pseudo, ville facultative, note et commentaire) me sont transmises par e-mail, ou par le service de formulaire indiqué le cas échéant, uniquement pour relire puis publier votre avis. Seuls votre prénom ou pseudo, votre ville et votre commentaire sont affichés, avec la date. Avant publication, votre avis est aussi conservé dans le navigateur de votre appareil (stockage local) afin de vous l'afficher ; vous pouvez l'effacer en vidant les données du site. Vous pouvez demander la suppression d'un avis publié à l'adresse ci-dessous.</p>
   <p>Le site est hébergé par GitHub (GitHub Pages), qui peut enregistrer des données techniques de connexion (adresse IP, date de visite) pour assurer le fonctionnement et la sécurité du service. Je n'y ai pas accès.</p>
   <p>Les liens vers Amazon mènent vers un site tiers, qui applique sa propre politique de confidentialité.</p>
   <p>Pour toute question ou pour exercer vos droits (accès, suppression), contactez-moi : faizoubionari@gmail.com.</p>
@@ -1367,7 +1411,7 @@ button{cursor:pointer;background:none;border:0;padding:0}
     </div>
 
     <div class="legal">
-      <p>Les prix et la disponibilité sont indicatifs et peuvent changer à tout moment. Le prix affiché sur Amazon au moment de l'achat fait foi. Les témoignages affichés actuellement sont des exemples de démonstration.</p>
+      <p>Les prix et la disponibilité sont indicatifs et peuvent changer à tout moment. Le prix affiché sur Amazon au moment de l'achat fait foi. Les avis affichés sont ceux de visiteurs déclarant avoir acheté le produit ; ils sont relus avant publication.</p>
       <p>© <span id="year"></span> Obsidienne. Éditeur : BOUKO Faïzou Bio Nari, faizoubionari@gmail.com. Hébergeur : GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. </p>
     </div>
   </div>
@@ -1785,113 +1829,18 @@ const EVENTS = (year) => {
 };
 
 /* =====================================================================
-   TÉMOIGNAGES — DONNÉES DE DÉMONSTRATION
-   Ce ne sont PAS de vrais avis. Remplacez-les par de vrais avis avant la
-   mise en ligne. Mettez verified:true uniquement pour un avis réellement vérifié.
-   Format : [note, catégorie, nom, ville, texte]
+   AVIS PAR PRODUIT
+   - REVIEWS : avis publiés. Vide au départ : aucun faux avis. Ajoutez-y, après
+     relecture, les avis reçus.
+     Format : { product:"ord-1", rating:5, name:"Prénom", city:"Ville",
+                text:"…", date:"2026-10-08", verified:false }
+     (product = id du produit ; verified:true uniquement si l'achat a été contrôlé)
+   - REVIEWS_ENDPOINT : URL d'un service de formulaire (Formspree, Getform…).
+     Si elle est vide, l'avis est envoyé par e-mail à REVIEWS_EMAIL.
    ===================================================================== */
-const TESTIMONIALS_DEMO = [
-[5,"ordinateurs","Nadia K.","Lyon","J'hésitais entre trois portables depuis des semaines. Le comparateur m'a fait gagner un temps fou : processeur, mémoire, autonomie, tout était aligné."],
-[4,"smartphones","Koffi A.","Abidjan","Présentation claire, sans blabla. J'aurais aimé plus de détails sur la photo de nuit, mais l'essentiel y était."],
-[5,"general","Mireille D.","Bruxelles","Enfin un site tech qui ne crie pas. On lit, on compare, on clique."],
-[5,"gaming","Yanis B.","Marseille","La partie gaming affiche tout de suite la plateforme et la compatibilité. Plus besoin d'ouvrir dix onglets."],
-[4,"tablettes","Estelle R.","Genève","J'ai choisi ma tablette pour dessiner grâce à la ligne « usage recommandé ». Il manque juste un filtre par taille d'écran."],
-[5,"skintech","Aïcha M.","Dakar","J'apprécie le ton prudent sur le masque LED. Pas de promesse miracle, juste des informations. Ça inspire confiance."],
-[3,"general","Thomas L.","Toulouse","Joli site, mais les animations ramaient un peu sur mon vieux téléphone. Le contenu, lui, est solide."],
-[5,"rayban","Julien P.","Montréal","Je ne savais pas qu'il existait autant de variantes de lunettes connectées. La fiche m'a aidé à comprendre ce qui change d'un modèle à l'autre."],
-[4,"ordinateurs","Fatou S.","Lomé","Trois choix par catégorie, c'est exactement ce qu'il faut pour ne pas se perdre."],
-[5,"general","Sébastien V.","Nantes","Le lien m'a envoyé sur la bonne page Amazon, avec le prix du jour. Aucune surprise."],
-[4.5,"smartphones","Clarisse N.","Douala","Je voulais un téléphone avec une grosse autonomie. Le tri et la recherche m'ont amenée à deux modèles en moins de cinq minutes."],
-[5,"tablettes","Hugo M.","Paris","Pour mes cours, la tablette recommandée correspondait pile à ce dont j'avais besoin : légère, grand écran, bon stockage."],
-[4,"gaming","Moussa D.","Bamako","J'ai offert un accessoire gaming à mon frère. La compatibilité était indiquée clairement, c'est ce qui m'a rassuré."],
-[5,"general","Inès F.","Casablanca","Le site ressemble à une vitrine de musée. On a envie de prendre son temps."],
-[3.5,"ordinateurs","Pierre-Alain G.","Lausanne","Bonne sélection, mais j'aurais aimé un modèle plus orienté développement. Peut-être à la prochaine mise à jour ?"],
-[5,"skintech","Laetitia B.","Bordeaux","Les modes lumineux sont expliqués simplement. J'ai lu la note de précaution avant de commander, c'est appréciable."],
-[4,"rayban","Karim H.","Tunis","Curieux de nature, j'ai découvert les lunettes connectées ici. Les rubriques audio et caméra répondaient à mes questions."],
-[5,"smartphones","Grâce O.","Cotonou","J'ai comparé trois smartphones sur mon téléphone : le tableau devient des cartes qu'on fait glisser. Très pratique."],
-[4.5,"general","Benoît C.","Lille","J'utilise la recherche comme sur une grande plateforme : je tape « tablette » et tout s'affiche."],
-[5,"ordinateurs","Amina T.","Niamey","Premier ordinateur pour mes études. Le guide m'a évité de payer pour des options inutiles."],
-[4,"tablettes","Romain E.","Strasbourg","Clair et bien organisé. Je repasserai pendant le Black Friday."],
-[5,"gaming","Lucas W.","Liège","Résolution, performances, fonctionnalités : tout est au même endroit. C'est rare."],
-[4,"general","Sandrine P.","Nice","J'ai d'abord lu la rubrique transparence : elle explique clairement comment le site se rémunère. Bon point."],
-[5,"smartphones","Ousmane K.","Conakry","J'hésitais entre deux téléphones très proches. La ligne « avantage principal » du comparateur a tranché pour moi."],
-[3,"rayban","Élodie J.","Rennes","J'aurais aimé plus de modèles de lunettes, mais les trois présentés sont bien décrits."],
-[5,"skintech","Nathalie V.","Québec","L'animation des couleurs est magnifique, et le texte reste sobre. Ce n'est pas du marketing à outrance."],
-[4.5,"ordinateurs","Désiré A.","Porto-Novo","Pratique de pouvoir trier par prix croissant. J'ai trouvé le portable adapté à mon budget."],
-[5,"general","Chloé R.","Montpellier","J'ai ajouté trois produits en favoris et je suis revenue le lendemain : ils étaient toujours là."],
-[4,"tablettes","Serge M.","Yaoundé","Tablette achetée pour ma mère. L'indication d'usage m'a aidé à choisir quelque chose de simple."],
-[5,"gaming","Kevin D.","Metz","Le calendrier des événements m'a rappelé de patienter jusqu'au Black Friday. Merci pour l'info."],
-[4,"smartphones","Mariam B.","Ouagadougou","Le site charge vite, même avec ma connexion mobile."],
-[5,"rayban","Antoine L.","Grenoble","Mise en page superbe. On a l'impression de feuilleter un magazine de design."],
-[4.5,"general","Josiane K.","Libreville","Pas de faux compte à rebours, pas de pression. Juste les produits et le lien vers Amazon."],
-[5,"ordinateurs","Florian T.","Dijon","Le récapitulatif processeur, RAM et stockage qui s'ouvre sur la carte est génial. Tout se lit d'un coup d'œil."],
-[3.5,"tablettes","Carole S.","Namur","Beau site. J'aurais aimé un comparatif tablette contre ordinateur portable pour mes usages."],
-[5,"skintech","Rokhaya N.","Thiès","Enfin une présentation de masque LED qui ne promet pas monts et merveilles. Juste des faits."],
-[4,"gaming","Mehdi A.","Alger","Bonne sélection, même si je joue surtout sur PC. Les infos de compatibilité sont précises."],
-[5,"smartphones","Jessica M.","Fort-de-France","La recherche instantanée l'est vraiment. Trois lettres tapées et le bon téléphone est apparu."],
-[4.5,"general","Arnaud B.","Reims","Bien plus agréable que de parcourir des centaines de résultats sans tri."],
-[5,"rayban","Sophie G.","Annecy","J'ai offert des lunettes connectées à mon mari. La fiche expliquait bien l'assistant vocal et l'autonomie."],
-[4,"ordinateurs","Didier N.","Kinshasa","Une sélection resserrée, et c'est une qualité."],
-[5,"tablettes","Emma L.","Rouen","Élégant sans être tape-à-l'œil. J'ai choisi ma tablette en dix minutes."],
-[4,"gaming","Bastien F.","Clermont-Ferrand","Infos utiles. Je vérifie quand même les avis sur Amazon avant d'acheter, et le site le recommande lui-même."],
-[5,"skintech","Gisèle H.","Abomey-Calavi","J'ai lu la FAQ avant d'acheter. Tout est expliqué, même pourquoi le prix peut changer."],
-[4.5,"smartphones","Frédéric Z.","Mulhouse","Mon ancien téléphone avait six ans. Le guide smartphone m'a remis à niveau rapidement."],
-[5,"general","Awa D.","Saint-Louis","La navigation sur mobile est aussi soignée que sur ordinateur."],
-[3,"ordinateurs","Marc-Antoine R.","Sherbrooke","J'aurais apprécié plus de détails sur la connectique. À part ça, c'est clair."],
-[5,"rayban","Nicolas P.","Tours","Je pensais que ces lunettes étaient un gadget. La description sobre m'a donné envie de m'y intéresser sérieusement."],
-[4,"tablettes","Priscille E.","Lomé","Recherche simple, comparaison simple, achat simple."],
-[5,"gaming","Thierry V.","Charleroi","Mes enfants voulaient une console. J'ai pu comparer les fonctionnalités sans me perdre dans le jargon."],
-[4.5,"smartphones","Fanta C.","Abidjan","Le filtre par note m'a permis d'écarter vite les modèles moins appréciés."],
-[5,"ordinateurs","Guillaume H.","Caen","Graphiste freelance, je cherchais un écran de qualité. La fiche écran était précise, j'ai trouvé mon bonheur."],
-[4,"skintech","Corinne F.","Perpignan","J'apprécie la mention indiquant que l'appareil ne remplace pas un avis médical. C'est honnête."],
-[5,"general","Yao K.","Accra","On sent le travail derrière chaque section. Rien n'est laissé au hasard."],
-[3.5,"gaming","Loïc B.","Brest","Les animations sont belles, parfois un peu lentes à mon goût. La sélection est pertinente."],
-[5,"tablettes","Marion D.","Avignon","J'ai comparé les trois tablettes dans le tableau, puis j'ai cliqué sur l'offre. Trois minutes chrono."],
-[4,"rayban","Olivier S.","Neuchâtel","Clair sur les fonctionnalités et prudent sur les promesses. J'aime ce ton."],
-[5,"smartphones","Aminata S.","Dakar","Mon fils m'a montré le site. Même moi, qui ne suis pas à l'aise avec la technologie, j'ai tout compris."],
-[4.5,"ordinateurs","Vincent M.","Angers","Le tri par meilleures notes m'a fait découvrir un portable que je n'aurais pas regardé sinon."],
-[5,"general","Hélène T.","Limoges","Un site qui explique d'où viennent ses revenus, ça devient rare. Merci."],
-[4,"gaming","Jordan L.","Toulon","La section Trending m'a fait découvrir un accessoire dont j'ignorais l'existence."],
-[5,"skintech","Béatrice A.","Montréal","L'univers Skin Tech a une vraie douceur visuelle. On passe de la tech pure à quelque chose de plus apaisé."],
-[4,"tablettes","Samuel N.","Douala","Les caractéristiques sont bien choisies : on ne se noie pas dans la fiche technique."],
-[5,"smartphones","Céline B.","Versailles","J'ai enfin compris la différence entre les capteurs photo grâce au guide. Achat fait sans regret."],
-[3,"general","Rachid E.","Oran","Bon site, mais j'aimerais une version sans animations pour mon ordinateur de bureau un peu ancien."],
-[5,"rayban","Mathilde C.","Poitiers","Offertes pour un anniversaire, validées par l'intéressé. La fiche m'avait bien orientée."],
-[4.5,"ordinateurs","Idrissa T.","Bobo-Dioulasso","Je cherchais un ordinateur pour mon activité. Autonomie et poids étaient mes critères, et ils étaient visibles tout de suite."],
-[5,"gaming","Maxime J.","Besançon","La page ne fait pas boutique discount. Elle donne confiance."],
-[4,"tablettes","Laure V.","Bayonne","Le guide tablette est court et utile. J'en aurais lu davantage."],
-[5,"general","Emmanuel O.","Cotonou","Le calendrier de fin d'année est une très bonne idée. Je sais quand revenir."],
-[4.5,"smartphones","Nadège P.","Pointe-à-Pitre","Rapide, lisible, efficace. Le prix était bien celui du jour une fois sur Amazon."],
-[5,"skintech","Fabienne R.","Aix-en-Provence","Je n'avais jamais vu les modes d'un masque LED présentés aussi clairement. Les couleurs défilent et on comprend tout de suite."],
-[4,"ordinateurs","Alexandre K.","Luxembourg","Sélection pertinente pour le télétravail. Le comparateur mériterait une ligne consacrée au poids."],
-[5,"rayban","Salif C.","Abidjan","Je voulais filmer mes sorties à vélo sans tenir mon téléphone. La rubrique caméra m'a aidé à me décider."],
-[3.5,"gaming","Quentin R.","Nancy","Correct, mais j'attends plus de références pour les accessoires PC."],
-[5,"general","Véronique L.","Orléans","Je suis allée directement dans la FAQ : chaque réponse est courte et va droit au but."],
-[4,"tablettes","Paul-Henri D.","Genève","Beau travail sur la typographie. Ça change des sites saturés de bandeaux."],
-[5,"smartphones","Adjoa M.","Lomé","Le comparateur sur mobile est un vrai plaisir à utiliser."],
-[4.5,"ordinateurs","Hervé G.","Saint-Étienne","Le récapitulatif m'a évité d'acheter une configuration surdimensionnée pour mes besoins."],
-[5,"skintech","Ophélie S.","Nîmes","Un produit beauté présenté comme un objet technologique, avec sérieux. J'adore l'approche."],
-[4,"gaming","Cédric N.","Mons","Bonne présentation des caractéristiques, pratique pour préparer une liste de Noël."],
-[5,"general","Mélanie F.","Le Mans","J'ai partagé le site avec toute la famille pour les cadeaux de fin d'année."],
-[4,"rayban","David B.","Ottawa","J'aurais aimé connaître le poids des lunettes, mais le reste était complet."],
-[5,"tablettes","Rosine A.","Parakou","Je me sers de ma tablette pour mon petit commerce. Le guide m'a orientée vers le bon stockage."],
-[4.5,"smartphones","Jérôme T.","Brive","Rien à redire : je cherche, je compare, je clique."],
-[3,"ordinateurs","Anne-Sophie M.","Vannes","Bien présenté, mais je suis restée sur ma faim côté ordinateurs de bureau."],
-[5,"gaming","Moïse E.","Yaoundé","Le passage lumineux entre les sections est bluffant. Et on trouve quand même ce qu'on cherche."],
-[4,"general","Isabelle C.","Colmar","Bon réflexe d'indiquer que les prix peuvent changer. Au moins, on n'est pas trompé."],
-[5,"skintech","Kadiatou B.","Conakry","Présentation élégante et respectueuse. Pas de photos retouchées à l'extrême, pas de promesses."],
-[4.5,"rayban","Christophe A.","La Rochelle","Les trois modèles sont bien différenciés. On comprend vite lequel correspond à son usage."],
-[5,"ordinateurs","Linda Z.","Lyon","Étudiante en architecture, j'avais besoin de puissance. Le tri et les fiches m'ont menée au bon modèle."],
-[4,"tablettes","Gaëtan P.","Tours","Pratique pour offrir. J'ai mis deux modèles en favoris et laissé ma femme choisir."],
-[5,"smartphones","Bintou K.","Bamako","Même en 4G moyenne, le site reste fluide. Bravo."],
-[3.5,"general","Stéphane D.","Lorient","Intéressant, mais j'aimerais une newsletter pour être prévenu des offres."],
-[5,"gaming","Arthur S.","Paris","L'une des plus belles vitrines tech que j'aie vues. Et tout reste lisible."],
-[4,"skintech","Pauline J.","Chambéry","J'ai apprécié le rappel de lire la notice. Beaucoup de sites l'oublient."],
-[5,"rayban","Wilfried H.","Cotonou","Section courte et bien faite. J'ai compris l'intérêt de l'assistant intégré."],
-[4.5,"ordinateurs","Juliette M.","Bruxelles","Le guide ordinateur est un modèle de clarté. J'aurais aimé l'avoir il y a deux ans."],
-[5,"tablettes","Kossi A.","Kara","Tablette pour les devoirs des enfants, choisie en famille devant le comparateur."],
-[5,"general","Marie-Claire N.","Libreville","Sérieux, beau, honnête. Je reviendrai pour Noël."]
-].map(([rating,category,name,city,text],i)=>({id:i+1,rating,category,name,city,text,verified:false,demo:true}));
+const REVIEWS = [];
+const REVIEWS_ENDPOINT = "";
+const REVIEWS_EMAIL = "faizoubionari@gmail.com";
 
 /* =====================================================================
    GUIDES ÉDITORIAUX
@@ -1928,7 +1877,8 @@ const FAQ = [
   ["Comment fonctionnent les liens Amazon ?","Ce sont des liens d'affiliation : si vous achetez après avoir cliqué, nous pouvons recevoir une commission, sans coût supplémentaire pour vous. La mention figure en bas de chaque page."],
   ["Les prix sont-ils définitifs ?","Non. Les prix affichés ici sont indicatifs et datés lorsque c'est possible. Le prix affiché sur Amazon au moment de votre achat est le seul qui fait foi."],
   ["Pourquoi le prix peut-il changer ?","Les prix sur Amazon évoluent selon les vendeurs, les stocks et les événements commerciaux, parfois plusieurs fois par jour."],
-  ["Les avis sont-ils vérifiés ?","Les témoignages actuellement affichés sont des exemples de démonstration. Un badge « Avis vérifié » n'apparaîtra que pour des avis dont l'authenticité a été contrôlée. Pour les avis d'acheteurs, consultez aussi la page Amazon du produit."],
+  ["Comment donner mon avis sur un produit acheté ?","Rendez-vous dans la section Avis, choisissez le produit que vous avez acheté, attribuez une note de 1 à 5 étoiles et rédigez votre commentaire. Vous pouvez laisser un avis pour chaque produit acheté. Seuls votre prénom ou pseudo et votre ville (facultative) sont affichés, et votre avis est relu avant d'être publié."],
+  ["Les avis sont-ils vérifiés ?","Chaque avis est relu avant publication et doit être déposé par une personne déclarant avoir acheté le produit. Comme la commande se fait sur Amazon et non sur ce site, nous ne pouvons pas confirmer chaque achat : la mention « Avis vérifié » n'apparaît que lorsque l'authenticité de l'avis a pu être contrôlée. Pour les avis d'acheteurs vérifiés par Amazon, consultez aussi la page du produit."],
   ["Comment fonctionnent les événements promotionnels ?","D'Halloween au Nouvel An, la barre en haut du site annonce l'événement en cours. Les offres elles-mêmes sont fixées par Amazon et les vendeurs ; nous signalons une réduction uniquement quand elle a été vérifiée."]
 ];
 </script>
@@ -2431,52 +2381,68 @@ function initPromo() {
   render(); setInterval(() => { if (!document.hidden) render(); }, 1000);
 }
 
-/* ---------- Témoignages ---------- */
-const initials = n => n.split(/[\s.-]+/).filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase();
-const catLabel = c => catBy[c]?.label || 'Général';
-const tcard = (t, tag = 'article') => `<${tag} class="tcard">${stars(t.rating)}<p>${esc(t.text)}</p>
-  <footer><span class="avatar" aria-hidden="true">${initials(t.name)}</span><span><b style="font-weight:500">${esc(t.name)}</b><br><small>${esc(t.city)}</small></span>
-  ${t.verified ? '<span class="verified">Avis vérifié</span>' : ''}<span class="tcat">${esc(catLabel(t.category))}</span></footer></${tag}>`;
+/* ---------- Avis par produit ---------- */
 function renderTestimonials() {
-  const T = TESTIMONIALS_DEMO;
-  const b1 = T.slice(0, 20), b2 = T.slice(20, 40), b3 = T.slice(40, 52), b4 = T.slice(52, 68), b5 = T.slice(68, 76), b6 = T.slice(76);
-  const loop = arr => { const h = arr.map(t => tcard(t)).join(''); return h + `<div style="display:contents" aria-hidden="true">${h}</div>`; };
-  $('#band1').innerHTML = loop(b1);
-  $('#band2').innerHTML = loop(b2);
-  // Bande 3 : cartes flottantes en profondeur
-  $('#band3').innerHTML = b3.map((t, i) => {
-    const col = i % 4, row = Math.floor(i / 4);
-    const left = col * 25 + (row % 2 ? 3 : 0) + ((i * 37) % 5) - 2;
-    const top = row * 200 + ((i * 53) % 40);
-    const z = [-140, 0, 70, -60][(i + row) % 4];
-    return tcard(t).replace('class="tcard"', `class="tcard" data-z="${z}" style="left:${Math.min(left, 76)}%;top:${top}px;transform:translateZ(${z}px);opacity:${z < -100 ? .7 : 1}"`);
+  const sel = $('#rvProduct'), list = $('#rvList'), head = $('#rvHead'), form = $('#rvForm'), status = $('#rvStatus'), forEl = $('#rvFor');
+  const LS = 'obs-my-reviews';
+  const mine = () => store.get(LS, []);
+  const initials = n => n.split(/[\s.-]+/).filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase();
+  const fmt = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }); };
+  const avg = a => Math.round(a.reduce((t, r) => t + r.rating, 0) / a.length * 10) / 10;
+
+  sel.innerHTML = '<option value="">Choisir un produit…</option>' + CATEGORIES.map(c => {
+    const ps = products.filter(p => p.category === c.slug);
+    return ps.length ? `<optgroup label="${esc(c.label)}">${ps.map(p => `<option value="${esc(p.id)}">${esc(p._name)}</option>`).join('')}</optgroup>` : '';
   }).join('');
-  // Bande 4 : slider
-  $('#band4').innerHTML = b4.map(t => tcard(t)).join('');
-  // Bande 5 : témoignage géant
-  $('#band5').innerHTML = b5.map((t, i) => `<figure class="giant__q${i === 0 ? ' is-on' : ''}" aria-hidden="${i !== 0}"><blockquote>${esc(t.text)}</blockquote><figcaption>${stars(t.rating)}<div style="margin-top:8px;color:var(--steel)">${esc(t.name)}, ${esc(t.city)} · ${esc(catLabel(t.category))}</div></figcaption></figure>`).join('')
-    + `<div class="giant__dots">${b5.map((_, i) => `<button aria-label="Témoignage ${i + 1}" aria-current="${i === 0}"></button>`).join('')}</div>`;
-  // Bande 6 : mini-avis
-  $('#band6').innerHTML = b6.map(t => `<article class="mini">${stars(t.rating)}<p style="margin:0">${esc(t.text)}</p><footer><span>${esc(t.name)}, ${esc(t.city)}</span><span>${esc(catLabel(t.category))}</span></footer></article>`).join('');
-  $('#miniMore').addEventListener('click', e => { const m = $('#band6'); m.classList.toggle('is-all'); e.currentTarget.textContent = m.classList.contains('is-all') ? 'Afficher moins' : 'Afficher tous les mini-avis'; });
 
-  // Slider
-  const tr = $('#band4');
-  const step = () => (tr.firstElementChild?.getBoundingClientRect().width || 400) + 18;
-  $('#slPrev').addEventListener('click', () => tr.scrollBy({ left: -step(), behavior: RM ? 'auto' : 'smooth' }));
-  $('#slNext').addEventListener('click', () => tr.scrollBy({ left: step(), behavior: RM ? 'auto' : 'smooth' }));
-  const prog = () => $('#slProg').style.width = `${clamp((tr.scrollLeft + tr.clientWidth) / tr.scrollWidth) * 100}%`;
-  tr.addEventListener('scroll', prog, { passive: true }); prog();
+  const item = r => `<article class="rv__item">${stars(r.rating)}<p>${esc(r.text)}</p>
+    <footer><span class="avatar" aria-hidden="true">${esc(initials(r.name))}</span><span><b style="font-weight:500">${esc(r.name)}</b><br><small>${esc([r.city, fmt(r.date)].filter(Boolean).join(' · '))}</small></span>
+    ${r.pending ? '<span class="rv__pending">En attente de modération</span>' : r.verified ? '<span class="verified">Avis vérifié</span>' : ''}</footer></article>`;
 
-  // Géant : rotation (en pause au survol ou au focus)
-  const g = $('#band5'); g.setAttribute('aria-live', 'off');
-  const qs = $$('.giant__q', g), dots = $$('.giant__dots button', g);
-  let gi = 0, paused = false;
-  const show = i => { gi = (i + qs.length) % qs.length; qs.forEach((q, k) => { q.classList.toggle('is-on', k === gi); q.setAttribute('aria-hidden', k !== gi); }); dots.forEach((d, k) => d.setAttribute('aria-current', k === gi)); };
-  dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
-  g.addEventListener('pointerenter', () => paused = true); g.addEventListener('pointerleave', () => paused = false);
-  g.addEventListener('focusin', () => paused = true); g.addEventListener('focusout', () => paused = false);
-  if (!RM) setInterval(() => { if (!paused && !document.hidden) show(gi + 1); }, 6500);
+  const renderList = () => {
+    const pid = sel.value, p = byId[pid];
+    forEl.textContent = p ? `Produit : ${p._name}` : 'Choisissez d\'abord un produit dans la liste ci-dessus.';
+    if (!p) { head.textContent = ''; list.innerHTML = '<p class="rv__empty">Sélectionnez un produit pour lire ses avis ou donner le vôtre.</p>'; return; }
+    const pub = REVIEWS.filter(r => r.product === pid);
+    const pend = mine().filter(r => r.product === pid).map(r => ({ ...r, pending: true }));
+    head.innerHTML = pub.length ? stars(avg(pub), pub.length) : 'Aucun avis publié pour ce produit pour le moment.';
+    list.innerHTML = pub.length + pend.length
+      ? [...pub, ...pend].map(item).join('')
+      : '<p class="rv__empty">Soyez le premier à donner votre avis sur ce produit.</p>';
+  };
+  sel.addEventListener('change', () => { status.textContent = ''; status.className = 'rv__status'; renderList(); });
+  renderList();
+
+  // Étoiles du formulaire
+  const labels = $$('#rvRate label'), radios = $$('#rvRate input');
+  const syncStars = () => { const v = +(radios.find(r => r.checked)?.value || 0); labels.forEach((l, i) => l.classList.toggle('is-on', i < v)); };
+  radios.forEach(r => r.addEventListener('change', syncStars));
+
+  const say = (msg, err) => { status.textContent = msg; status.className = 'rv__status' + (err ? ' is-err' : ''); };
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const fd = new FormData(form), pid = sel.value, p = byId[pid];
+    if (fd.get('website')) return; // anti-spam
+    const name = String(fd.get('name') || '').trim(), city = String(fd.get('city') || '').trim(), text = String(fd.get('text') || '').trim(), rating = +fd.get('rating') || 0;
+    if (!p) return say('Choisissez d\'abord le produit que vous avez acheté.', true);
+    if (!rating) return say('Attribuez une note de 1 à 5 étoiles.', true);
+    if (name.length < 2) return say('Indiquez votre prénom ou un pseudo.', true);
+    if (text.length < 20) return say('Votre commentaire est un peu court (20 caractères minimum).', true);
+    if (!fd.get('bought')) return say('Confirmez que vous avez acheté ce produit.', true);
+    if (mine().some(r => r.product === pid)) return say('Vous avez déjà donné votre avis sur ce produit.', true);
+    const review = { product: pid, rating, name, city, text, date: new Date().toISOString().slice(0, 10) };
+    if (REVIEWS_ENDPOINT) {
+      let ok = false;
+      try { const res = await fetch(REVIEWS_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ ...review, productName: p._name }) }); ok = res.ok; } catch {}
+      if (!ok) return say('L\'envoi a échoué. Réessayez dans un instant.', true);
+    }
+    store.set(LS, [...mine(), review]);
+    form.reset(); syncStars(); renderList();
+    if (REVIEWS_ENDPOINT) { say('Merci ! Votre avis a bien été envoyé et sera publié après relecture.'); return; }
+    say('Merci ! Votre messagerie s\'ouvre : envoyez le message pour transmettre votre avis. Il sera publié après relecture.');
+    const body = `Produit : ${p._name}\nNote : ${rating}/5\nNom : ${name}\nVille : ${city || '-'}\nJ'ai acheté ce produit : oui\n\n${text}`;
+    location.href = `mailto:${REVIEWS_EMAIL}?subject=${encodeURIComponent('Avis : ' + p._name)}&body=${encodeURIComponent(body)}`;
+  });
 }
 
 /* ---------- Éditorial & FAQ ---------- */
@@ -2631,7 +2597,7 @@ function initScroll() {
       feats().forEach((li, i) => li.classList.toggle('is-on', p > 0.28 + i * 0.07));
     }
     // Cartes flottantes : profondeur au scroll
-    const fb = floatBox.getBoundingClientRect();
+    const fb = floatBox ? floatBox.getBoundingClientRect() : { top: 0, bottom: 0, height: 0 };
     if (innerWidth > 760 && fb.top < vh && fb.bottom > 0) {
       const k = (fb.top + fb.height / 2 - vh / 2) / vh;
       $$('.tcard', floatBox).forEach(c => { const z = +c.dataset.z; c.style.transform = `translate3d(0, ${k * z * 0.6}px, ${z}px)`; });
